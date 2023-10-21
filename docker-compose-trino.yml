@@ -1,5 +1,6 @@
-
 version: "3.9"
+name: trino
+
 services:
   trino-coordinator:
     image: "trinodb/trino:428"
