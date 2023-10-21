@@ -10,7 +10,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Validate Docker Compose
-        run: docker-compose config
+        run: docker-compose -f docker-compose-hms.yml config -q
       - name: Check validation result
         run: |
           if [ $? -eq 0 ]
