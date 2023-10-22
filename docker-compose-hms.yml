@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 
 services:
   postgres:
@@ -19,15 +19,10 @@ services:
 
   hivemetastore:
     build:
-      context: hive-metastorea
+      context: hive-metastore
       dockerfile: Dockerfile
     # image: apache/hive-metastore:3.1.2
     environment:
-      # POSTGRES_HOST: postgres
-      # POSTGRES_PORT: 5432
-      # POSTGRES_DB: hivemetastore
-      # POSTGRES_USER: hive
-      # POSTGRES_PASSWORD: hivepassword
       HIVE_METASTORE_MEMORY: 3G
       HIVE_METASTORE_DRIVER: "org.postgresql.Driver"
       HIVE_METASTORE_USER: hive

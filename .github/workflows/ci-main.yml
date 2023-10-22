@@ -1,22 +1,26 @@
-name: Docker Compose Validation
+name: Validate Docker Compose
+
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
   validate:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Validate Docker Compose
-        run: docker-compose -f docker-compose-hms.yml config -q
-      - name: Check validation result
-        run: |
-          if [ $? -eq 0 ]
-          then
-            echo "Docker Compose file is valid"
-          else
-            echo "Docker Compose file is invalid"
-            exit 1
-          fi
+        run: docker-compose -f docker-compose-hms.yml -f docker-compose-storage.yml -f docker-compose-trino.yml config -q
+
+      - name: Check for Docker Compose errors
+        run: docker-compose -f docker-compose-hms.yml -f docker-compose-storage.yml -f docker-compose-trino.yml config --services
+
+      - name: Check for Docker Compose warnings
+        run: docker-compose -f docker-compose-hms.yml -f docker-compose-storage.yml -f docker-compose-trino.yml config --volumes
