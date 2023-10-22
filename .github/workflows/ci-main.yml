@@ -20,7 +20,7 @@ jobs:
         run: docker-compose -f docker-compose-hms.yml -f docker-compose-storage.yml -f docker-compose-trino.yml config -q
 
       - name: Check for Docker Compose errors
-        run: docker-compose config --services
+        run: docker-compose -f docker-compose-hms.yml -f docker-compose-storage.yml -f docker-compose-trino.yml config --services
 
       - name: Check for Docker Compose warnings
-        run: docker-compose config --volumes
+        run: docker-compose -f docker-compose-hms.yml -f docker-compose-storage.yml -f docker-compose-trino.yml config --volumes
